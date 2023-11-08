@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { EquiposService } from './equipos.service';
 import { EquiposController } from './equipos.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Equipo } from './entities/equipo.entity';
+import { DatabaseModule } from '../config/configOrm.module';
+import { equipoProviders } from './equipos.providers';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Equipo])],
+  imports: [DatabaseModule],
   controllers: [EquiposController],
-  providers: [EquiposService],
+  providers: [...equipoProviders, EquiposService],
 })
 export class EquiposModule {}
