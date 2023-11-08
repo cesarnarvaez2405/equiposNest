@@ -40,7 +40,11 @@ export class EquiposController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.equiposService.remove(+id);
+  async remove(@Param('id') id: number) {
+    try {
+      return await this.equiposService.remove(+id);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

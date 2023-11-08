@@ -28,6 +28,6 @@ export class EquiposService {
   }
 
   async remove(id: number) {
-    return `This action removes a #${id} equipo`;
+    return await this.equipoRepository.delete(id);
   }
 }
