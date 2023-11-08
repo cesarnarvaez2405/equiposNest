@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { EquiposModule } from './equipos/equipos.module';
 import { ConfigModule } from '@nestjs/config';
-import { databaseProviders } from './config/configOrm.providers';
 
 @Module({
   imports: [
