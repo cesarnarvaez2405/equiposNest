@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateEquipoDto } from './dto/create-equipo.dto';
 import { UpdateEquipoDto } from './dto/update-equipo.dto';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Equipo } from './entities/equipo.entity';
 import { Repository } from 'typeorm';
 
@@ -12,11 +11,12 @@ export class EquiposService {
     private equipoRepository: Repository<Equipo>,
   ) {}
   async create(createEquipoDto: CreateEquipoDto) {
-    return 'This action adds a new equipo';
+    const equipo = this.equipoRepository.create(createEquipoDto);
+    return await this.equipoRepository.save(equipo);
   }
 
   async findAll() {
-    return `This action returns a equipo`;
+    return await this.equipoRepository.find();
   }
 
   async findOne(id: number) {

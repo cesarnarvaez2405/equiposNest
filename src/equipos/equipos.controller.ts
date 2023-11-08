@@ -17,7 +17,11 @@ export class EquiposController {
 
   @Post()
   create(@Body() createEquipoDto: CreateEquipoDto) {
-    return this.equiposService.create(createEquipoDto);
+    try {
+      return this.equiposService.create(createEquipoDto);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   @Get()
