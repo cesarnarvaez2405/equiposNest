@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { EquiposModule } from './equipos/equipos.module';
 import { ConfigModule } from '@nestjs/config';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     ConfigModule.forRoot({
       envFilePath: '.env.development',
     }),
+    AuthModule,
     
   ],
   controllers: [],
