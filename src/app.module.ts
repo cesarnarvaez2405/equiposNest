@@ -6,10 +6,11 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 @Module({
   imports: [
     EquiposModule,
+    UsuariosModule,
     ConfigModule.forRoot({
       envFilePath: '.env.development',
     }),
-    UsuariosModule,
+    
   ],
   controllers: [],
   providers: [],
