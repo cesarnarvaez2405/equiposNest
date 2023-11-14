@@ -22,7 +22,7 @@ export class UsuariosService {
     })
   }
 
-  async findAll() {
+  async findAll() { 
     return `This action returns all usuarios`;
   }
 
