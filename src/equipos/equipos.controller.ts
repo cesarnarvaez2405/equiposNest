@@ -31,7 +31,7 @@ export class EquiposController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.equiposService.findOne(+id);
+    return this.equiposService.buscarPorId(+id);
   }
 
   @Patch(':id')

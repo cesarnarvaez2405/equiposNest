@@ -19,12 +19,22 @@ export class EquiposService {
     return await this.equipoRepository.find();
   }
 
-  async findOne(id: number) {
-    return `This action returns a #${id} equipo`;
+  async buscarPorId(id: number) {
+    const datos = await this.equipoRepository.findOne({
+      where: { id },
+    });
+    if (!datos) {
+      return `No se encontro el equipo ${id}`;
+    }
+    return datos;
   }
 
   async update(id: number, updateEquipoDto: UpdateEquipoDto) {
-    return `This action updates a #${id} equipo`;
+    const datos = await this.buscarPorId(id);
+    if (!datos) {
+      return `No se encontro el equipo ${id}`;
+    }
+    return await this.equipoRepository.update(id, updateEquipoDto);
   }
 
   async remove(id: number) {
