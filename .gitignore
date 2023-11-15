@@ -39,4 +39,4 @@ lerna-debug.log*
 .env.development
 
 #Nombre de JWT
-/src/constants/constants.ts
+/src/auth/constants/constants.ts
