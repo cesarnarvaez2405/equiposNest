@@ -28,6 +28,7 @@ export class RegisterDto {
   telefono: number;
 
   @IsString()
+  @IsOptional()
   rol_id: string;
 
   @IsBoolean()

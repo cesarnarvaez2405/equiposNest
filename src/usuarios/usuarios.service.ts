@@ -22,8 +22,15 @@ export class UsuariosService {
     })
   }
 
+  async buscaPorEmailYPassword(email: string){
+    return this.usuariosRepository.findOne({
+      where: {email},
+      select:  ['RowId', 'nombre', 'email', 'password', 'rol_id', 'esta_activo']
+    })
+  }
+
   async findAll() { 
-    return `This action returns all usuarios`;
+    return this.usuariosRepository.find()
   }
 
   async findOne(id: number) {

@@ -10,12 +10,15 @@ import {
 import { EquiposService } from './equipos.service';
 import { CreateEquipoDto } from './dto/create-equipo.dto';
 import { UpdateEquipoDto } from './dto/update-equipo.dto';
+import { Auth } from 'src/auth/decorators/auth.decorators';
+import { Role } from 'src/common/enums/rol.enum';
 
 @Controller('equipos')
 export class EquiposController {
   constructor(private readonly equiposService: EquiposService) {}
 
   @Post()
+  @Auth(Role.Admin)
   create(@Body() createEquipoDto: CreateEquipoDto) {
     try {
       return this.equiposService.create(createEquipoDto);
@@ -25,6 +28,7 @@ export class EquiposController {
   }
 
   @Get()
+  @Auth(Role.Admin)
   findAll() {
     return this.equiposService.findAll();
   }
@@ -40,6 +44,7 @@ export class EquiposController {
   }
 
   @Delete(':id')
+  @Auth(Role.Admin)
   async remove(@Param('id') id: number) {
     try {
       return await this.equiposService.remove(+id);

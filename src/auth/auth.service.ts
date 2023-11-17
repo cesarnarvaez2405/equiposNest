@@ -25,8 +25,8 @@ export class AuthService {
   }
 
   async login(login) {
-    const { email, password} = login;
-    const tieneEmail = await this.usuariosService.buscarPorEmail(email);
+    const { email, password } = login;
+    const tieneEmail = await this.usuariosService.buscaPorEmailYPassword(email);
     if (!tieneEmail) {
       throw new BadRequestException('Usuario no esta registrado');
     }
@@ -37,13 +37,18 @@ export class AuthService {
       throw new UnauthorizedException('La contraseña es ioncorrecta');
     }
 
-    const payload = { email: tieneEmail.email, rol:tieneEmail.rol_id  };
+    const payload = { email: tieneEmail.email, rol: tieneEmail.rol_id };
 
     const token = await this.jwtService.signAsync(payload);
 
     return {
       token,
-      payload
+      payload,
     };
+  }
+
+  async perfil(perfil) {
+    const { email } = perfil;
+    return await this.usuariosService.buscarPorEmail(email);
   }
 }
