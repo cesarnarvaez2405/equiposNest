@@ -3,6 +3,7 @@ import { EquiposModule } from './equipos/equipos.module';
 import { ConfigModule } from '@nestjs/config';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { AuthModule } from './auth/auth.module';
+import { TarjetaLartModule } from './tarjeta-lart/tarjeta-lart.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { AuthModule } from './auth/auth.module';
       envFilePath: '.env.development',
     }),
     AuthModule,
+    TarjetaLartModule,
     
   ],
   controllers: [],
