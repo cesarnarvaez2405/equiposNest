@@ -4,13 +4,24 @@ import {
   Get,
   Post,
   UseGuards,
-  Request,
+  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { AuthGuard } from './guard/auth.guard';
+import { Request } from 'express';
+import { Roles } from './decorators/roles.decorator';
+import { RolesGuard } from './guard/roles.guard';
+import { Role } from './enums/rol.enum';
+import { Auth } from './decorators/auth.decorators';
 
+interface RequestWithUser extends Request {
+  usuario: {
+    email: string,
+    rol: string
+  }
+}
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -32,10 +43,10 @@ export class AuthController {
   }
 
   @Get('perfil')
-  @UseGuards(AuthGuard)
+  @Auth(Role.Admin)
   perfil(
-    @Request()
-    req: any,
+    @Req()
+    req: RequestWithUser
   ) {
     return req.usuario;
   }
