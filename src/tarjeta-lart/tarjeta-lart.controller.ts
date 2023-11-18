@@ -3,7 +3,7 @@ import { TarjetaLartService } from './tarjeta-lart.service';
 import { CreateTarjetaLartDto } from './dto/create-tarjeta-lart.dto';
 import { UpdateTarjetaLartDto } from './dto/update-tarjeta-lart.dto';
 
-@Controller('tarjeta-lart')
+@Controller('tarjeta')
 export class TarjetaLartController {
   constructor(private readonly tarjetaLartService: TarjetaLartService) {}
 

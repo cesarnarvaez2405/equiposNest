@@ -1,23 +1,45 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { CreateTarjetaLartDto } from './dto/create-tarjeta-lart.dto';
 import { UpdateTarjetaLartDto } from './dto/update-tarjeta-lart.dto';
+import { Repository } from 'typeorm';
+import { TarjetaLart } from './entities/tarjeta-lart.entity';
 
 @Injectable()
 export class TarjetaLartService {
-  create(createTarjetaLartDto: CreateTarjetaLartDto) {
-    return 'This action adds a new tarjetaLart';
+  constructor(
+    @Inject('TARJETA_REPOSITORY')
+    private tarjetaRepository: Repository<TarjetaLart>,
+  ) {}
+  async create(createTarjetaLartDto: CreateTarjetaLartDto) {
+    const { uId } = createTarjetaLartDto;
+    const tarjeta = await this.findOne({
+      uId: { uId },
+    });
+    console.log(tarjeta)
+    if (tarjeta) {
+      throw new BadRequestException('La tarjeta ya existe');
+    }
+    const tarjetaNueva = this.tarjetaRepository.create(createTarjetaLartDto);
+    return await this.tarjetaRepository.save(tarjetaNueva);
   }
 
   findAll() {
-    return `This action returns all tarjetaLart`;
+    return this.tarjetaRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tarjetaLart`;
+  findOne(options?: any) {
+    return this.tarjetaRepository.findBy({
+      ...options,
+    });
   }
 
-  update(id: number, updateTarjetaLartDto: UpdateTarjetaLartDto) {
-    return `This action updates a #${id} tarjetaLart`;
+  update(RowId: number, updateTarjetaLartDto: UpdateTarjetaLartDto) {
+    const tarjeta = this.findOne({
+      where: { RowId },
+    });
+    if (!tarjeta) {
+      throw new BadRequestException('Tarjeta no existe');
+    }
   }
 
   remove(id: number) {

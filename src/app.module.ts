@@ -7,14 +7,13 @@ import { TarjetaLartModule } from './tarjeta-lart/tarjeta-lart.module';
 
 @Module({
   imports: [
-    EquiposModule,
-    UsuariosModule,
     ConfigModule.forRoot({
       envFilePath: '.env.development',
     }),
+    EquiposModule,
+    UsuariosModule,
     AuthModule,
     TarjetaLartModule,
-    
   ],
   controllers: [],
   providers: [],
